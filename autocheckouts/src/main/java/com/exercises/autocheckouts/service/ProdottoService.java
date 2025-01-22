@@ -1,4 +1,4 @@
-package com.exercises.autocheckouts.Service;
+package com.exercises.autocheckouts.service;
 
 import com.exercises.autocheckouts.model.Prodotto;
 import com.exercises.autocheckouts.repository.ProdottoRepository;
@@ -10,12 +10,12 @@ import java.util.Optional;
 
 @Service
 public class ProdottoService {
+
+    private final ProdottoRepository prodottoRepository;
+
     @Autowired
-    ProdottoRepository prodottoRepository;
-
-
-    public ProdottoService() {
-        System.out.println("creo un oggetto OrderService...");
+    public ProdottoService(ProdottoRepository prodottoRepository) {
+        this.prodottoRepository = prodottoRepository;
     }
 
     // Aggiungere un prodotto al database
@@ -40,8 +40,8 @@ public class ProdottoService {
         if (prodottoEsistente.isPresent()) {
             Prodotto prodotto = prodottoEsistente.get();
             prodotto.setNome(nuovoProdotto.getNome());
-            prodotto.setPrezzo(nuovoProdotto.getPrezzo());
-            prodotto.setDescrizione(nuovoProdotto.getDescrizione());
+            prodotto.setGrammatura(nuovoProdotto.getGrammatura());
+            prodotto.setReparto(nuovoProdotto.getReparto());
             return prodottoRepository.save(prodotto);
         }
         return null;  // Se non esiste, ritorna null

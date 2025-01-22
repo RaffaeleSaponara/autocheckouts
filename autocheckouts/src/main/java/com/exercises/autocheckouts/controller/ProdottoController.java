@@ -1,7 +1,7 @@
 package com.exercises.autocheckouts.controller;
 ;
 import com.exercises.autocheckouts.model.Prodotto;
-import com.exercises.autocheckouts.Service.ProdottoService;
+import com.exercises.autocheckouts.service.ProdottoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,11 +14,11 @@ import java.util.List;
 @RequestMapping("/prodotto")
 public class ProdottoController {
     @Autowired
-    ProdottoService prodottoService;
+    private final ProdottoService prodottoService;
 
 
-    public ProdottoController() {
-        System.out.println("creo un oggetto OrderRestController");
+    public ProdottoController(ProdottoService prodottoService) {
+        this.prodottoService=prodottoService;
     }
 
     // Metodo per ottenere tutti i prodotti
@@ -32,7 +32,7 @@ public class ProdottoController {
     public ResponseEntity<String> getProdottoById(@PathVariable Long id, Model model) {
         Prodotto a = prodottoService.getProdottoPerId(id).orElse(null);
         System.out.println(a.getNome());
-        return ResponseEntity.ok("Hello World!" + a.getNome());
+        return ResponseEntity.ok("Hello World!" + a.toString());
     }
 
     // Metodo per aggiungere un prodotto

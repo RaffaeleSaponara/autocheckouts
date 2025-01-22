@@ -1,60 +1,45 @@
 package com.exercises.autocheckouts.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-
-//import javax.persistence.Entity;
-//import javax.persistence.Table;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "prodotto")
 public class Prodotto {
-    @jakarta.persistence.Id
-    @jakarta.persistence.Column(name = "idprodotto", nullable = false)
-    private Long id;
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "idprodotto")
-//    private Long idProdotto;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idprodotto")
+    private Long id;
     @Column(name = "nome")
     private String nome;
+    @Column(name = "reparto")
+    private String reparto;
     @Column(name = "prezzo")
     private double prezzo;
-    @Column(name = "descrizione")
-    private String descrizione;
+    @Column(name = "grammatura")
+    private int grammatura;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "unit")
+    private Unit unit;
+    @Column(name = "stock")
+    private int stock;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     // Costruttore
     public Prodotto() {}
 
-    public Prodotto(String nome, double prezzo, String descrizione) {
+    public Prodotto(String nome, int grammatura, String reparto, double prezzo, Unit unit, int stock) {
         this.nome = nome;
+        this.grammatura = grammatura;
+        this.reparto = reparto;
         this.prezzo = prezzo;
-        this.descrizione = descrizione;
+        this.unit = unit;
+        this.stock = stock;
+
     }
 
-    // Getter e Setter
-//    public Long getIdProdotto() {
-//        return idProdotto;
-//    }
-//
-//    public void setIdProdotto(Long idProdotto) {
-//        this.idProdotto = idProdotto;
-//    }
-
+    public Long getId() {return id;}
     public String getNome() {
         return nome;
     }
@@ -63,29 +48,37 @@ public class Prodotto {
         this.nome = nome;
     }
 
-    public double getPrezzo() {
-        return prezzo;
+    public int getGrammatura() {
+        return grammatura;
     }
 
-    public void setPrezzo(double prezzo) {
-        this.prezzo = prezzo;
+    public void setGrammatura(int grammatura) {
+        this.grammatura = grammatura;
     }
 
-    public String getDescrizione() {
-        return descrizione;
+    public String getReparto() {
+        return reparto;
     }
 
-    public void setDescrizione(String descrizione) {
-        this.descrizione = descrizione;
+    public void setReparto(String reparto) {
+        this.reparto = reparto;
     }
+    public double getPrezzo() {return prezzo;}
+    public void setPrezzo(double prezzo) {this.prezzo = prezzo;}
+    public Unit getUnit() {return unit;}
+    public void setUnit(Unit unit) {this.unit = unit;}
+    public int getStock() {return stock;}
+    public void setStock(int stock) {this.stock = stock;}
 
     @Override
     public String toString() {
         return "Prodotto{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
-                ", prezzo=" + prezzo +
-                ", descrizione='" + descrizione + '\'' +
+                ", prezzo=" + grammatura +
+                ", unit=" + unit +
+                ", stock=" + stock +
+                ", reparto='" + reparto + '\'' +
                 '}';
     }
 }
