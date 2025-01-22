@@ -1,1 +1,6 @@
 com\exercises\autocheckouts\AutocheckoutsApplication.class
+com\exercises\autocheckouts\controller\ProvaController.class
+com\exercises\autocheckouts\repository\ProdottoRepository.class
+com\exercises\autocheckouts\controller\ProdottoController.class
+com\exercises\autocheckouts\Service\ProdottoService.class
+com\exercises\autocheckouts\model\Prodotto.class

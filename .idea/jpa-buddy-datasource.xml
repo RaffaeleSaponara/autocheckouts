@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JpbDataSourceConfig">
+    <data-sources>
+      <data-source id="616b3edd-6183-44c5-abfc-2bfa1bc46401" name="autocheckouts." url="jdbc:mysql://localhost:3306/autocheckouts" driverClass="com.mysql.cj.jdbc.Driver" />
+    </data-sources>
     <data-source-infos>
       <data-source-info id="" persistence-unit-name="Default" />
+      <data-source-info id="182edc76-9a07-4a80-99fa-29bcd1d1523f" persistence-unit-name="prova" />
     </data-source-infos>
   </component>
 </project>
