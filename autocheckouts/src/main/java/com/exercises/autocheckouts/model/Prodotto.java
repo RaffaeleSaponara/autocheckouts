@@ -2,13 +2,15 @@ package com.exercises.autocheckouts.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "prodotto")
 public class Prodotto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idprodotto")
+    @Column(name = "id")
     private Long id;
     @Column(name = "nome")
     private String nome;
@@ -19,6 +21,8 @@ public class Prodotto {
     @Enumerated(EnumType.STRING)
     @Column(name = "unit")
     private Unit unit;
+    @ManyToMany(mappedBy = "prodotti")
+    private List<Scontrino> scontrini;
 
 
 

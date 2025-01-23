@@ -10,6 +10,9 @@
     <!-- Iteriamo sulla lista di prodotti -->
     <li th:each="prodotto : ${prodotti}">
         <p>Nome: <span th:text="${prodotto.nome}"></span></p>
+        <p>Reparto: <span th:text="${prodotto.reparto}"></span></p>
+        <p>Grammatura: <span th:text="${prodotto.grammatura}"></span></p>
+        <p>Unit: <span th:text="${prodotto.unit}"></span></p>
         <hr/>
     </li>
 </ul>

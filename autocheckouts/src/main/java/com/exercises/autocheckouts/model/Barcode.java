@@ -9,7 +9,7 @@ import java.util.Date;
 public class Barcode {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idbarcode")
+    @Column(name = "id")
     private Long id;
     @Column(name = "inizio")
     private Date inizio;
@@ -17,6 +17,9 @@ public class Barcode {
     private Date fine;
     @Column(name = "code")
     private String code;
+    @ManyToOne
+    @JoinColumn(name = "idprodotto")
+    private Prodotto prodotto;
 
     public Barcode(){}
 
@@ -53,6 +56,13 @@ public class Barcode {
     public Long getId() {
         return id;
     }
+    public Prodotto getProdotto() {
+        return prodotto;
+    }
+
+    public void setProdotto(Prodotto prodotto) {
+        this.prodotto = prodotto;
+    }
 
     @Override
     public String toString() {
@@ -63,4 +73,6 @@ public class Barcode {
                 ", code=" + code +
                 '}';
     }
+
+
 }
