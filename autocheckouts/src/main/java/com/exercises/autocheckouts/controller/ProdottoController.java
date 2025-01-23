@@ -21,11 +21,13 @@ public class ProdottoController {
         this.prodottoService=prodottoService;
     }
 
-    // Metodo per ottenere tutti i prodotti
     @GetMapping
-    public List<Prodotto> getAllProdotti() {
-        return prodottoService.getTuttiIProdotti();
+    public String getAllProdotti(Model model) {
+        List<Prodotto> prodotti =prodottoService.getTuttiIProdotti();
+        model.addAttribute("prodotti",prodotti);
+        return "prodotti";
     }
+
 
     // Metodo per ottenere un prodotto per ID
     @GetMapping("/{id}")

@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Prodotto</title>
+    <title>Lista Prodotti</title>
 </head>
 <body>
-<h1>Dettagli del prodotto</h1>
-<p><strong>Nome prodotto:</strong> ${prodotto.nome}</span></p>
+<h1>Lista dei Prodotti</h1>
+<ul>
+    <!-- Iteriamo sulla lista di prodotti -->
+    <li th:each="prodotto : ${prodotti}">
+        <p>Nome: <span th:text="${prodotto.nome}"></span></p>
+        <hr/>
+    </li>
+</ul>
 </body>
 </html>

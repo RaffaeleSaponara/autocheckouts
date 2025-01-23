@@ -17,25 +17,16 @@ public class ProdottoService {
     public ProdottoService(ProdottoRepository prodottoRepository) {
         this.prodottoRepository = prodottoRepository;
     }
-
-    // Aggiungere un prodotto al database
     public Prodotto aggiungiProdotto(Prodotto prodotto) {
         return prodottoRepository.save(prodotto);
     }
-
-    // Ottenere tutti i prodotti
     public List<Prodotto> getTuttiIProdotti() {
         return prodottoRepository.findAll();
     }
-
-    // Ottenere un prodotto per ID
     public Optional<Prodotto> getProdottoPerId(Long id) {
         return prodottoRepository.findById(id);
     }
-
-    // Aggiornare un prodotto
     public Prodotto aggiornaProdotto(Long id, Prodotto nuovoProdotto) {
-        // Verifica se il prodotto esiste
         Optional<Prodotto> prodottoEsistente = prodottoRepository.findById(id);
         if (prodottoEsistente.isPresent()) {
             Prodotto prodotto = prodottoEsistente.get();
@@ -44,10 +35,9 @@ public class ProdottoService {
             prodotto.setReparto(nuovoProdotto.getReparto());
             return prodottoRepository.save(prodotto);
         }
-        return null;  // Se non esiste, ritorna null
+        return null;
     }
 
-    // Eliminare un prodotto
     public boolean eliminaProdotto(Long id) {
         if (prodottoRepository.existsById(id)) {
             prodottoRepository.deleteById(id);
