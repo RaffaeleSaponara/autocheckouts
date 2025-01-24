@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista Prodotti</title>
+    <style>
+        .product-list {
+            margin-bottom: 20px;
+        }
+
+        .product-item {
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .cart-list {
+            margin-top: 20px;
+            border-top: 2px solid #ccc;
+            padding-top: 10px;
+        }
+
+        .cart-item {
+            padding: 5px;
+            border: 1px solid #ddd;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Lista Prodotti</h1>
+
+<div th:each="prodotto : ${prodotti}" class="product-item">
+    <span th:text="${prodotto.nome}"></span>
+    <button type="button"
+            th:attr="onclick='aggiungiAlloScontrino(' + ${prodotto.id} + ', \'' + ${prodotto.nome} + '\', \'' + ${prodotto.reparto} + '\', ' + ${prodotto.grammatura} + ', \'' + ${prodotto.unit} + '\')'">
+        Aggiungi al carrello
+    </button>
+</div>
+
+<h2>Carrello</h2>
+<div class="cart-list" id="cart-list">
+    <!-- I prodotti aggiunti al carrello verranno visualizzati qui -->
+</div>
+<button id="crea-scontrino" onclick="creaScontrino()">Crea Scontrino</button>
+<script>
+
+   let carrelloIds = [];
+
+    class Prodotto {
+        constructor(idProdotto, nomeProdotto, reparto, grammatura, unit) {
+        this.id = idProdotto;
+        this.nome = nomeProdotto;
+        this.reparto = reparto;
+        this.grammatura = grammatura;
+        this.unit = unit;
+        }
+    }
+
+    function aggiungiAlloScontrino(idProdotto, nomeProdotto, reparto, grammatura, unit) {
+
+
+        let prodotto = new Prodotto(idProdotto, nomeProdotto, reparto, grammatura, unit);
+        const cartList = document.getElementById('cart-list');
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+        cartItem.id = 'cart-item-' + idProdotto + '-' + Date.now();
+        cartItem.textContent = nomeProdotto;
+        cartItem.innerHTML = `
+                ${nomeProdotto} <button onclick="rimuoviDalCarrello('${cartItem.id}')">Rimuovi</button>
+            `;
+        cartList.appendChild(cartItem);
+        carrelloIds.push(prodotto);
+        console.log(carrelloIds[0]);
+<!--        carrelloIds.push(cartItem.id);-->
+}
+
+    function rimuoviDalCarrello(idProdotto) {
+        const prodottoId = parseInt(idProdotto.match(/cart-item-(\d+)-\d+/)[1]);
+        const prodottoIndex = carrelloIds.findIndex(p => p[0] === prodottoId);
+        if (prodottoIndex !== -1) {
+            carrelloIds.splice(prodottoIndex, 1); // Rimuove l'elemento
+        }
+        const cartItem = document.getElementById(idProdotto);
+        cartItem.remove();
+
+    }
+
+        // Funzione per creare lo scontrino
+        function creaScontrino() {
+            fetch('/scontrino/creaScontrino', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(carrelloIds)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    alert('Acquisto completato! Totale: ' + data.importo + ' €');
+                    document.getElementById('cart-list').innerHTML = ''; // Pulisci il carrello dopo l'acquisto
+                    carrelloIds = []
+                } else {
+                    alert('Carrello vuoto, impossibile creare lo scontrino!');
+                }
+            })
+            .catch(error => {
+                console.error('Errore:', error);
+            });
+    }
+</script>
+
+</body>
+</html>

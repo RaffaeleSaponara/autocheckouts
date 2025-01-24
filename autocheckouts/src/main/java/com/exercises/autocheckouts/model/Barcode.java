@@ -1,11 +1,13 @@
 package com.exercises.autocheckouts.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "barcode")
+@Data
 public class Barcode {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,40 +31,7 @@ public class Barcode {
         this.code = barcode;
     }
 
-    protected Date getInizio() {
-        return inizio;
-    }
 
-    protected void setInizio(Date inizio) {
-        this.inizio = inizio;
-    }
-
-    protected Date getFine() {
-        return fine;
-    }
-
-    protected void setFine(Date fine) {
-        this.fine = fine;
-    }
-
-    protected String getcode() {
-        return code;
-    }
-
-    protected void setBarcode(String code) {
-        this.code = code;
-    }
-
-    public Long getId() {
-        return id;
-    }
-    public Prodotto getProdotto() {
-        return prodotto;
-    }
-
-    public void setProdotto(Prodotto prodotto) {
-        this.prodotto = prodotto;
-    }
 
     @Override
     public String toString() {

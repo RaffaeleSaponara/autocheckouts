@@ -1,12 +1,14 @@
 package com.exercises.autocheckouts.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "scontrino")
+@Data
 public class Scontrino {
 
     @Id
@@ -27,40 +29,11 @@ public class Scontrino {
 
     public Scontrino(){}
 
-    public Scontrino(double importo, Date data){
+    public Scontrino(double importo, Date data, List<Prodotto> dettaglio){
         this.setImporto(importo);
         this.setData(data);
+        this.prodotti=dettaglio;
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public double getImporto() {
-        return importo;
-    }
-
-    public void setImporto(double importo) {
-        this.importo = importo;
-    }
-
-    public Date getData() {
-        return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;
-    }
-
-    public List<Prodotto> getProdotti() {
-        return prodotti;
-    }
-
-    public void setProdotti(List<Prodotto> prodotti) {
-        this.prodotti = prodotti;
-    }
 }

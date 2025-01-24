@@ -1,11 +1,13 @@
 package com.exercises.autocheckouts.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "prezzo")
+@Data
 public class Prezzo {
 
     @Id
@@ -27,11 +29,5 @@ public class Prezzo {
         this.data=data;
     }
 
-    public Prodotto getProdotto() {
-        return prodotto;
-    }
 
-    public void setProdotto(Prodotto prodotto) {
-        this.prodotto = prodotto;
-    }
 }

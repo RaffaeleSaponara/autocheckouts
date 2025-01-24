@@ -105,5 +105,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:6.2.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.xmlunit:xmlunit-core:2.10.0" level="project" />
     <orderEntry type="library" name="Maven: javax.persistence:javax.persistence-api:2.2" level="project" />
+    <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.36" level="project" />
   </component>
 </module>

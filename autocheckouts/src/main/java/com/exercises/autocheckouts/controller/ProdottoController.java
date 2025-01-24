@@ -25,16 +25,15 @@ public class ProdottoController {
     public String getAllProdotti(Model model) {
         List<Prodotto> prodotti =prodottoService.getTuttiIProdotti();
         model.addAttribute("prodotti",prodotti);
-        return "prodotti";
+        return "scontrino";
     }
 
 
     // Metodo per ottenere un prodotto per ID
     @GetMapping("/{id}")
-    public ResponseEntity<String> getProdottoById(@PathVariable Long id, Model model) {
+    public ResponseEntity<Prodotto> getProdottoById(@PathVariable Long id, Model model) {
         Prodotto a = prodottoService.getProdottoPerId(id).orElse(null);
-        System.out.println(a.getNome());
-        return ResponseEntity.ok("Hello World!" + a.toString());
+        return ResponseEntity.ok(a);
     }
 
     // Metodo per aggiungere un prodotto

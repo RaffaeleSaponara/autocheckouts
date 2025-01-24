@@ -1,11 +1,13 @@
 package com.exercises.autocheckouts.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
 
 @Entity
 @Table(name = "prodotto")
+@Data
 public class Prodotto {
 
     @Id
@@ -38,32 +40,6 @@ public class Prodotto {
 
     }
 
-    public Long getId() {return id;}
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public int getGrammatura() {
-        return grammatura;
-    }
-
-    public void setGrammatura(int grammatura) {
-        this.grammatura = grammatura;
-    }
-
-    public String getReparto() {
-        return reparto;
-    }
-
-    public void setReparto(String reparto) {
-        this.reparto = reparto;
-    }
-    public Unit getUnit() {return unit;}
-    public void setUnit(Unit unit) {this.unit = unit;}
 
 
     @Override
