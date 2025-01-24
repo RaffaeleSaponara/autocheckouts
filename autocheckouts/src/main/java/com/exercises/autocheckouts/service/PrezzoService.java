@@ -14,7 +14,6 @@ import java.util.Optional;
 public class PrezzoService {
     private final PrezzoRepository prezzoRepository;
 
-    @Autowired
     public PrezzoService(PrezzoRepository prezzoRepository) {
         this.prezzoRepository = prezzoRepository;
     }
@@ -29,8 +28,6 @@ public class PrezzoService {
                tot += prezzo.get().getPrezzo();
             }
         }
-
-
        return tot;
     }
 }

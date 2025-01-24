@@ -1,7 +1,9 @@
 package com.exercises.autocheckouts.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.List;
@@ -9,6 +11,8 @@ import java.util.List;
 @Entity
 @Table(name = "scontrino")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Scontrino {
 
     @Id
@@ -27,13 +31,6 @@ public class Scontrino {
     )
     private List<Prodotto> prodotti;
 
-    public Scontrino(){}
-
-    public Scontrino(double importo, Date data, List<Prodotto> dettaglio){
-        this.setImporto(importo);
-        this.setData(data);
-        this.prodotti=dettaglio;
-    }
 
 
 }

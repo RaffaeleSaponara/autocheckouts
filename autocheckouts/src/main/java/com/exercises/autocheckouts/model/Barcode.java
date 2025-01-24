@@ -1,13 +1,17 @@
 package com.exercises.autocheckouts.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "barcode")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Barcode {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,15 +26,6 @@ public class Barcode {
     @ManyToOne
     @JoinColumn(name = "idprodotto")
     private Prodotto prodotto;
-
-    public Barcode(){}
-
-    public Barcode(Date inizio, Date fine, String barcode){
-        this.inizio = inizio;
-        this.fine = fine;
-        this.code = barcode;
-    }
-
 
 
     @Override

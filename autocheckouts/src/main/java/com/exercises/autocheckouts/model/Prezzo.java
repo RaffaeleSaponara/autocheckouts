@@ -1,13 +1,17 @@
 package com.exercises.autocheckouts.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "prezzo")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Prezzo {
 
     @Id
@@ -21,13 +25,6 @@ public class Prezzo {
     @ManyToOne
     @JoinColumn(name = "idprodotto")
     private Prodotto prodotto;
-
-    public Prezzo(){};
-
-    public Prezzo(double prezzo, Date data){
-        this.prezzo=prezzo;
-        this.data=data;
-    }
 
 
 }

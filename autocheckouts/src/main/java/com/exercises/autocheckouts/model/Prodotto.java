@@ -1,13 +1,17 @@
 package com.exercises.autocheckouts.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Table(name = "prodotto")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Prodotto {
 
     @Id
@@ -23,24 +27,12 @@ public class Prodotto {
     @Enumerated(EnumType.STRING)
     @Column(name = "unit")
     private Unit unit;
+
     @ManyToMany(mappedBy = "prodotti")
     private List<Scontrino> scontrini;
 
-
-
-    // Costruttore
-    public Prodotto() {}
-
-    public Prodotto(String nome, int grammatura, String reparto, Unit unit) {
-        this.nome = nome;
-        this.grammatura = grammatura;
-        this.reparto = reparto;
-        this.unit = unit;
-
-
-    }
-
-
+    @OneToMany(mappedBy = "prodotto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Barcode> barcode;
 
     @Override
     public String toString() {

@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/stock")
 public class StockController {
 
-    @Autowired
     private final StockService stockService;
-
 
     public StockController(StockService stockService) {
         this.stockService=stockService;
