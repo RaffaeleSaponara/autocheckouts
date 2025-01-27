@@ -10,5 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface ProdottoRepository extends JpaRepository<Prodotto, Long> {
-        Prodotto findByBarcode(Barcode barcode);
+        Prodotto findByBarcodes(Barcode barcode);
 }

@@ -1,5 +1,6 @@
 package com.exercises.autocheckouts.service;
 
+import com.exercises.autocheckouts.model.Barcode;
 import com.exercises.autocheckouts.model.Prezzo;
 import com.exercises.autocheckouts.model.Prodotto;
 import com.exercises.autocheckouts.repository.PrezzoRepository;
@@ -18,12 +19,12 @@ public class PrezzoService {
         this.prezzoRepository = prezzoRepository;
     }
 
-    public Double calculatePrezzo(List<Prodotto> prodotti) {
+    public Double calculatePrezzoByBarcode(List<Barcode> prodotti) {
 
         Double tot = 0.0;
 
-        for(Prodotto p : prodotti){
-            Optional<Prezzo> prezzo = prezzoRepository.findByProdotto(p);
+        for(Barcode b : prodotti){
+            Optional<Prezzo> prezzo = prezzoRepository.findByBarcode(b);
             if(prezzo.isPresent()) {
                tot += prezzo.get().getPrezzo();
             }

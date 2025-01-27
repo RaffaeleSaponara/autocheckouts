@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "barcode")
@@ -27,6 +28,11 @@ public class Barcode {
     @JoinColumn(name = "idprodotto")
     private Prodotto prodotto;
 
+    @ManyToMany(mappedBy = "barcodes")
+    private List<Scontrino> scontrini;
+
+    @OneToMany(mappedBy = "barcode")
+    private List<Prezzo> prezzo;
 
     @Override
     public String toString() {

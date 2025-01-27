@@ -28,11 +28,8 @@ public class Prodotto {
     @Column(name = "unit")
     private Unit unit;
 
-    @ManyToMany(mappedBy = "prodotti")
-    private List<Scontrino> scontrini;
-
     @OneToMany(mappedBy = "prodotto", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Barcode> barcode;
+    private List<Barcode> barcodes;
 
     @Override
     public String toString() {

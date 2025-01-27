@@ -7,6 +7,7 @@ import com.exercises.autocheckouts.repository.ProdottoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +38,15 @@ public class BarcodeService {
     }
 
     public Prodotto getProdottoByBarcode(Barcode barcode) {
-        Prodotto prodotto = prodottoRepository.findByBarcode(barcode);
+        Prodotto prodotto = prodottoRepository.findByBarcodes(barcode);
         return prodotto;
+    }
+
+    public List<Barcode> getBarcodesByCodes(String[] dettaglio) {
+        List<Barcode> barcodes = new ArrayList<>();
+        for (String s: dettaglio) {
+            barcodes.add(barcodeRepository.findByCode(s));
+        }
+        return barcodes;
     }
 }

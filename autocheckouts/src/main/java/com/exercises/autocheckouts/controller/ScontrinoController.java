@@ -1,7 +1,9 @@
 package com.exercises.autocheckouts.controller;
 
-import com.exercises.autocheckouts.model.Prodotto;
+import com.exercises.autocheckouts.model.Barcode;
 import com.exercises.autocheckouts.model.Scontrino;
+import com.exercises.autocheckouts.model.ScontrinoDTO;
+import com.exercises.autocheckouts.service.BarcodeService;
 import com.exercises.autocheckouts.service.ScontrinoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,14 +18,18 @@ import java.util.List;
 public class ScontrinoController {
 
     private final ScontrinoService scontrinoService;
+    private final BarcodeService barcodeService;
 
-    public ScontrinoController(ScontrinoService scontrinoService) {
+    public ScontrinoController(ScontrinoService scontrinoService, BarcodeService barcodeService) {
         this.scontrinoService = scontrinoService;
+        this.barcodeService = barcodeService;
     }
 
     @PostMapping("/creaScontrino")
-    public ResponseEntity<Scontrino> creaScontrino(@RequestBody List<Prodotto> dettaglio) {
-        Scontrino scontrino = scontrinoService.aggiungiScontrino(dettaglio);
-        return ResponseEntity.ok(scontrino);
+    public ResponseEntity<ScontrinoDTO> creaScontrino(@RequestBody String[] dettaglio) {
+        List<Barcode> listaBarcode = barcodeService.getBarcodesByCodes(dettaglio);
+        Scontrino scontrino = scontrinoService.aggiungiScontrino(listaBarcode);
+        ScontrinoDTO scontrinoDTO = ScontrinoDTO.convertToDTO(scontrino);
+        return ResponseEntity.ok(scontrinoDTO);
     }
 }

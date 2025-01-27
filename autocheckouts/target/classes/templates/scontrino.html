@@ -30,16 +30,6 @@
     </style>
 </head>
 <body>
-
-<h1>Lista Prodotti</h1>
-
-<div th:each="prodotto : ${prodotti}" class="product-item">
-    <span th:text="${prodotto.nome}"></span>
-    <button type="button"
-            th:attr="onclick='aggiungiAlloScontrino(' + ${prodotto.id} + ', \'' + ${prodotto.nome} + '\', \'' + ${prodotto.reparto} + '\', ' + ${prodotto.grammatura} + ', \'' + ${prodotto.unit} + '\')'">
-        Aggiungi al carrello
-    </button>
-</div>
 <div>
     <input type="text" id="inputValue" placeholder="Inserisci Barcode">
     <button onclick="getProdottoByBarcode()">Inserisci</button>
@@ -55,18 +45,19 @@
    let carrelloIds = [];
 
     class Prodotto {
-        constructor(idProdotto, nomeProdotto, reparto, grammatura, unit) {
+        constructor(idProdotto, nomeProdotto, reparto, grammatura, unit, barcode) {
         this.id = idProdotto;
         this.nome = nomeProdotto;
         this.reparto = reparto;
         this.grammatura = grammatura;
         this.unit = unit;
+        this.barcode = barcode;
         }
     }
 
-    function aggiungiAlloScontrino(idProdotto, nomeProdotto, reparto, grammatura, unit) {
+    function aggiungiAlloScontrino(idProdotto, nomeProdotto, reparto, grammatura, unit, barcode) {
 
-        let prodotto = new Prodotto(idProdotto, nomeProdotto, reparto, grammatura, unit);
+        let prodotto = new Prodotto(idProdotto, nomeProdotto, reparto, grammatura, unit, barcode);
         const cartList = document.getElementById('cart-list');
         const cartItem = document.createElement('div');
         cartItem.className = 'cart-item';
@@ -102,7 +93,7 @@
             .then(response => response.json())
                     .then(data => {
                         if (data) {
-                            aggiungiAlloScontrino(data.id, data.nome, data.reparto, data.grammatura, data.unit);
+                            aggiungiAlloScontrino(data.id, data.nome, data.reparto, data.grammatura, data.unit, barcode);
                         }
                     })
                     .catch(error => {
@@ -111,14 +102,14 @@
                 }
 
 
-
     function creaScontrino() {
+    const primiElementi = carrelloIds.map(arr => arr.barcode);
         fetch('/scontrino/creaScontrino', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(carrelloIds)
+            body: JSON.stringify(primiElementi)
         })
         .then(response => response.json())
         .then(data => {

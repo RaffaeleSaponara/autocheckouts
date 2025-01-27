@@ -22,9 +22,10 @@ public class Prezzo {
     private Double prezzo;
     @Column(name = "data")
     private Date data;
+
     @ManyToOne
-    @JoinColumn(name = "idprodotto")
-    private Prodotto prodotto;
+    @JoinColumn(name = "idbarcode")
+    private Barcode barcode;
 
 
 }

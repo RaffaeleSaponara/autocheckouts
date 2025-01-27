@@ -26,12 +26,12 @@ public class ProdottoController {
         model.addAttribute("prodotti",prodotti);
         return "scontrino";
     }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Prodotto> getProdottoById(@PathVariable Long id, Model model) {
-        Prodotto a = prodottoService.getProdottoPerId(id).orElse(null);
-        return ResponseEntity.ok(a);
-    }
+//
+//    @GetMapping("/{id}")
+//    public ResponseEntity<Prodotto> getProdottoById(@PathVariable Long id, Model model) {
+//        Prodotto a = prodottoService.getProdottoPerId(id).orElse(null);
+//        return ResponseEntity.ok(a);
+//    }
 
 
 }

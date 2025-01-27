@@ -1,6 +1,6 @@
 package com.exercises.autocheckouts.service;
 
-import com.exercises.autocheckouts.model.Prodotto;
+import com.exercises.autocheckouts.model.Barcode;
 import com.exercises.autocheckouts.model.Scontrino;
 import com.exercises.autocheckouts.repository.ScontrinoRepository;
 import org.springframework.stereotype.Service;
@@ -18,12 +18,10 @@ public class ScontrinoService {
         this.prezzoService = prezzoService;
     }
 
-    public Scontrino aggiungiScontrino(List<Prodotto> dettaglio) {
-
-        Double tot = prezzoService.calculatePrezzo(dettaglio);
+    public Scontrino aggiungiScontrino(List<Barcode> dettaglio) {
+        Double tot = prezzoService.calculatePrezzoByBarcode(dettaglio);
         Scontrino scontrino = new Scontrino(null, tot, new Date(), dettaglio);
         return scontrinoRepository.save(scontrino);
     }
-
 
 }

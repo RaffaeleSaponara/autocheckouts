@@ -25,11 +25,11 @@ public class Scontrino {
     private Date data;
     @ManyToMany
     @JoinTable(
-            name = "prodotto_scontrino",
-            joinColumns = @JoinColumn(name = "id_scontrino"),
-            inverseJoinColumns = @JoinColumn(name = "id_prodotto")
+            name = "barcode_scontrino",
+            joinColumns = @JoinColumn(name = "idscontrino"),
+            inverseJoinColumns = @JoinColumn(name = "idbarcode")
     )
-    private List<Prodotto> prodotti;
+    private List<Barcode> barcodes;
 
 
 
