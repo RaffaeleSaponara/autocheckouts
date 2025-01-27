@@ -20,8 +20,8 @@ public class ProdottoService {
     public List<Prodotto> getTuttiIProdotti() {
         return prodottoRepository.findAll();
     }
-    public Optional<Prodotto> getProdottoPerId(Long id) {
-        return prodottoRepository.findById(id);
+    public Prodotto getProdottobyName(String nome) {
+        return prodottoRepository.findByNome(nome);
     }
 
 

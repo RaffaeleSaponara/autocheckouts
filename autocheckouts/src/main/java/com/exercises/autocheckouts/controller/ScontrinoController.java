@@ -32,4 +32,6 @@ public class ScontrinoController {
         ScontrinoDTO scontrinoDTO = ScontrinoDTO.convertToDTO(scontrino);
         return ResponseEntity.ok(scontrinoDTO);
     }
+
+
 }

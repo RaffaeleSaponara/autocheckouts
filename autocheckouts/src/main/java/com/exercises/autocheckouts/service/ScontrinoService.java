@@ -5,6 +5,7 @@ import com.exercises.autocheckouts.model.Scontrino;
 import com.exercises.autocheckouts.repository.ScontrinoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -24,4 +25,22 @@ public class ScontrinoService {
         return scontrinoRepository.save(scontrino);
     }
 
+    public List<Scontrino> findByTodayDate() {
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        Date startOfDay = calendar.getTime();
+
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        calendar.set(Calendar.MILLISECOND, 999);
+        Date endOfDay = calendar.getTime();
+
+        List<Scontrino> scontrini = scontrinoRepository.findByDataBetween(startOfDay, endOfDay);
+        return scontrini;
+    }
 }
