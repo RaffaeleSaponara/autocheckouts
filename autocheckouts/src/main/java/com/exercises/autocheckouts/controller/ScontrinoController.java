@@ -7,6 +7,7 @@ import com.exercises.autocheckouts.service.BarcodeService;
 import com.exercises.autocheckouts.service.ScontrinoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +32,16 @@ public class ScontrinoController {
         Scontrino scontrino = scontrinoService.aggiungiScontrino(listaBarcode);
         ScontrinoDTO scontrinoDTO = ScontrinoDTO.convertToDTO(scontrino);
         return ResponseEntity.ok(scontrinoDTO);
+    }
+
+    @GetMapping("/incasso")
+    public ResponseEntity<Double> getIncassoGiornata(){
+        double incasso= 0.0;
+        List<Scontrino> scontriniToday = scontrinoService.findByTodayDate();
+        for (Scontrino s: scontriniToday) {
+            incasso += s.getImporto();
+        }
+        return ResponseEntity.ok(incasso);
     }
 
 

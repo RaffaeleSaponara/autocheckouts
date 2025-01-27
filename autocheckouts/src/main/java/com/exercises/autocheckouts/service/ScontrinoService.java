@@ -43,4 +43,5 @@ public class ScontrinoService {
         List<Scontrino> scontrini = scontrinoRepository.findByDataBetween(startOfDay, endOfDay);
         return scontrini;
     }
+
 }
