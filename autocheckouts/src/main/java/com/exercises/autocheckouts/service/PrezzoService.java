@@ -31,4 +31,8 @@ public class PrezzoService {
         }
        return tot;
     }
+
+    public Prezzo getPrezzoByBarcode(Barcode barcode){
+        return prezzoRepository.findPrezzoByBarcode(barcode);
+    }
 }

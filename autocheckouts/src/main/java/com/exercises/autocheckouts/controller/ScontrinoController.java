@@ -7,12 +7,13 @@ import com.exercises.autocheckouts.service.BarcodeService;
 import com.exercises.autocheckouts.service.ScontrinoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.xml.crypto.Data;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/scontrino")
@@ -42,6 +43,14 @@ public class ScontrinoController {
             incasso += s.getImporto();
         }
         return ResponseEntity.ok(incasso);
+    }
+
+    @GetMapping("/incasso/{day}")
+    public ResponseEntity<String> getIncassoGiornataPerArticolo(@PathVariable String day){
+        Long ldata = Long.parseLong(day);
+        List<Scontrino> scontriniGiornoX = scontrinoService.findByDate(ldata);
+        Map<String, List<Double>>  dettaglio = scontrinoService.getDettaglio(scontriniGiornoX);
+        return ResponseEntity.ok("OK");
     }
 
 
