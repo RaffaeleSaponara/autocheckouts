@@ -106,4 +106,40 @@ public class ScontrinoService {
         }
         return products;
     }
+
+    public Map<String, List<Double>> getDettaglioPerReparto(List<Scontrino> scontriniGiornoX) {
+        Map<String, List<Double>> products = new HashMap<>();
+        if(!scontriniGiornoX.isEmpty()){
+            for (Scontrino s: scontriniGiornoX) {
+                System.out.println("ciao");
+                List<Barcode> barcodes = s.getBarcodes();
+
+                for (Barcode b: barcodes) {
+                    Prodotto prodotto = prodottoRepository.findByBarcodes(b);
+                    List<Double> quantitaPrezzo = new ArrayList<>();
+                    Prezzo prezzo = prezzoService.getPrezzoByBarcode(b);
+                    if(products.containsKey(prodotto.getReparto())){
+                        int quantita = (int) (products.get(prodotto.getReparto()).get(0) + 1);
+                        quantitaPrezzo.add(0, (double) quantita);
+                        quantitaPrezzo.add(1, quantita*prezzo.getPrezzo() );
+                        products.put(prodotto.getReparto(), quantitaPrezzo);
+                    }else{
+                        quantitaPrezzo.add(0, 1.0 );
+                        quantitaPrezzo.add(1, prezzo.getPrezzo() );
+                        products.put(prodotto.getReparto(), quantitaPrezzo);
+                    }
+                }
+            }
+
+            System.out.println("Il giorno " + scontriniGiornoX.get(0).getData() + " sono stati venduti i seguenti prodotti:");
+
+            products.forEach((product, quantityAndPrice) -> {
+
+                System.out.println(product + " quantità: " + quantityAndPrice.get(0) + " ricavo: "+ quantityAndPrice.get(1));
+
+            });
+        }
+        return products;
+
+    }
 }

@@ -9,9 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.crypto.Data;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -50,6 +47,14 @@ public class ScontrinoController {
         Long ldata = Long.parseLong(day);
         List<Scontrino> scontriniGiornoX = scontrinoService.findByDate(ldata);
         Map<String, List<Double>>  dettaglio = scontrinoService.getDettaglio(scontriniGiornoX);
+        return ResponseEntity.ok("OK");
+    }
+
+    @GetMapping("/incasso/reparto/{day}")
+    public ResponseEntity<String> getIncassoGiornataPerReparto(@PathVariable String day){
+        Long ldata = Long.parseLong(day);
+        List<Scontrino> scontriniGiornoX = scontrinoService.findByDate(ldata);
+        Map<String, List<Double>>  dettaglio = scontrinoService.getDettaglioPerReparto(scontriniGiornoX);
         return ResponseEntity.ok("OK");
     }
 
