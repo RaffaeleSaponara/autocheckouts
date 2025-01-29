@@ -18,20 +18,15 @@ public class StockController {
 
     private final StockService stockService;
     private final ScontrinoService scontrinoService;
-    private final BarcodeService barcodeService;
-    private final ProdottoService prodottoService;
 
-    public StockController(StockService stockService, ScontrinoService scontrinoService, BarcodeService barcodeService, ProdottoService prodottoService) {
+    public StockController(StockService stockService, ScontrinoService scontrinoService) {
         this.stockService=stockService;
         this.scontrinoService=scontrinoService;
-        this.barcodeService=barcodeService;
-        this.prodottoService=prodottoService;
     }
 
     @GetMapping("/aggiorna")
     public ResponseEntity<String> aggiornaStock(){
-
-        List<Scontrino> scontriniToday = scontrinoService.findByTodayDate();
+        List<Scontrino> scontriniToday = scontrinoService.findByDate("today");
         stockService.aggiornaStock(scontriniToday);
         return ResponseEntity.ok("Stock Aggiornati!");
     }

@@ -32,29 +32,34 @@ public class ScontrinoController {
         return ResponseEntity.ok(scontrinoDTO);
     }
 
-    @GetMapping("/incasso")
+    @GetMapping("/incasso/giornata")
     public ResponseEntity<Double> getIncassoGiornata(){
         double incasso= 0.0;
-        List<Scontrino> scontriniToday = scontrinoService.findByTodayDate();
+        List<Scontrino> scontriniToday = scontrinoService.findByDate("today");
         for (Scontrino s: scontriniToday) {
             incasso += s.getImporto();
         }
         return ResponseEntity.ok(incasso);
     }
 
-    @GetMapping("/incasso/{day}")
+    @GetMapping("/incasso/prodotto/{day}")
     public ResponseEntity<String> getIncassoGiornataPerArticolo(@PathVariable String day){
-        Long ldata = Long.parseLong(day);
-        List<Scontrino> scontriniGiornoX = scontrinoService.findByDate(ldata);
-        Map<String, List<Double>>  dettaglio = scontrinoService.getDettaglio(scontriniGiornoX);
+        List<Scontrino> scontriniGiornoX = scontrinoService.findByDate(day);
+        Map<String, List<Double>>  dettaglio = scontrinoService.getDettaglioPerProdotto(scontriniGiornoX);
         return ResponseEntity.ok("OK");
     }
 
-    @GetMapping("/incasso/reparto/{day}")
+    @GetMapping("/incasso/reparto/giornaliero/{day}")
     public ResponseEntity<String> getIncassoGiornataPerReparto(@PathVariable String day){
-        Long ldata = Long.parseLong(day);
-        List<Scontrino> scontriniGiornoX = scontrinoService.findByDate(ldata);
+        List<Scontrino> scontriniGiornoX = scontrinoService.findByDate(day);
         Map<String, List<Double>>  dettaglio = scontrinoService.getDettaglioPerReparto(scontriniGiornoX);
+        return ResponseEntity.ok("OK");
+    }
+
+    @GetMapping("/incasso/reparto/annuale/{year}")
+    public ResponseEntity<String> getIncassoAnnualePerReparto(@PathVariable int year){
+        List<Scontrino> scontriniAnnoX = scontrinoService.findByYear(year);
+        Map<String, List<Double>>  dettaglio = scontrinoService.getDettaglioPerReparto(scontriniAnnoX);
         return ResponseEntity.ok("OK");
     }
 

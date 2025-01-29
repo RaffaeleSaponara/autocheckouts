@@ -2,11 +2,9 @@ package com.exercises.autocheckouts.service;
 
 import com.exercises.autocheckouts.model.Prodotto;
 import com.exercises.autocheckouts.repository.ProdottoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProdottoService {
@@ -19,9 +17,6 @@ public class ProdottoService {
 
     public List<Prodotto> getTuttiIProdotti() {
         return prodottoRepository.findAll();
-    }
-    public Prodotto getProdottobyName(String nome) {
-        return prodottoRepository.findByNome(nome);
     }
 
 
